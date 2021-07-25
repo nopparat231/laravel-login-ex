@@ -35,9 +35,6 @@
         }
     },
     "scripts": {
-        "post-install-cmd": [
-            "composer install"
-        ],  
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
@@ -51,7 +48,9 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": []
+            "dont-discover": [
+                "laravel/dusk"
+            ]
         }
     },
     "config": {
