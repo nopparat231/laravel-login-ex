@@ -34,7 +34,7 @@ return [
     'google' => [
         'client_id' => env('GOOGLE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
-        'redirect' => 'http://127.0.0.1:8000/laravel-login-ex/public/login/google/callback',
+        'redirect' => 'http://127.0.0.1:8000/login/google/callback',
     ],
 
     'facebook' => [
@@ -47,6 +47,12 @@ return [
         'client_id' => env('GITHUB_CLIENT_ID'),
         'client_secret' => env('GITHUB_CLIENT_SECRET'),
         'redirect' => 'https://laravel-login-ex.herokuapp.com/laravel-socialite/public/login/github/callback',
+    ],
+
+    'line' => [
+        'client_id' => env('LINE_CLIENT_ID'),
+        'client_secret' => env('LINE_CLIENT_SECRET'),
+        'redirect' => 'http://127.0.0.1:8000/login/line/callback',
     ],
 
 ];

@@ -32,3 +32,7 @@ Route::get('login/facebook/callback', [App\Http\Controllers\Auth\LoginController
 // Github login
 Route::get('login/github', [App\Http\Controllers\Auth\LoginController::class, 'redirectToGithub'])->name('login.github');
 Route::get('login/github/callback', [App\Http\Controllers\Auth\LoginController::class, 'handleGithubCallback']);
+
+// Line login
+Route::get('login/line', [App\Http\Controllers\Auth\LoginController::class, 'redirectToLine'])->name('login.line');
+Route::get('login/line/callback', [App\Http\Controllers\Auth\LoginController::class, 'handleLineCallback']);
