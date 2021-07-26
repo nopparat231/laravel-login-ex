@@ -34,25 +34,25 @@ return [
     'google' => [
         'client_id' => env('GOOGLE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
-        'redirect' => 'http://127.0.0.1:8000/login/google/callback',
+        'redirect' => 'http://laravel-login-ex.herokuapp.com/login/google/callback',
     ],
 
     'facebook' => [
         'client_id' => env('FACEBOOK_CLIENT_ID'),
         'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
-        'redirect' => 'https://laravel-login-ex.herokuapp.com/laravel-socialite/public/login/facebook/callback',
+        'redirect' => 'http://laravel-login-ex.herokuapp.com/login/facebook/callback',
     ],
 
     'github' => [
         'client_id' => env('GITHUB_CLIENT_ID'),
         'client_secret' => env('GITHUB_CLIENT_SECRET'),
-        'redirect' => 'https://laravel-login-ex.herokuapp.com/laravel-socialite/public/login/github/callback',
+        'redirect' => 'http://laravel-login-ex.herokuapp.com/login/github/callback',
     ],
 
     'line' => [
         'client_id' => env('LINE_CLIENT_ID'),
         'client_secret' => env('LINE_CLIENT_SECRET'),
-        'redirect' => 'http://127.0.0.1:8000/login/line/callback',
+        'redirect' => 'http://laravel-login-ex.herokuapp.com/login/line/callback',
     ],
 
 ];
