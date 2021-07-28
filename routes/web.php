@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LineHookController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,3 +37,5 @@ Route::get('login/github/callback', [App\Http\Controllers\Auth\LoginController::
 // Line login
 Route::get('login/line', [App\Http\Controllers\Auth\LoginController::class, 'redirectToLine'])->name('login.line');
 Route::get('login/line/callback', [App\Http\Controllers\Auth\LoginController::class, 'handleLineCallback']);
+
+Route::post('hooks', [LineHookController::class, 'hooks']);
