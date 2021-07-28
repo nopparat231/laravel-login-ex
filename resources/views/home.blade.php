@@ -17,6 +17,13 @@
                         {{ __('You are logged in!') }}
                         <h1>Add Line For Notify</h1>
                         <img src="https://qr-official.line.me/sid/L/573pogdt.png" >
+
+                        <form action="line_bot" method="post">
+                            <input type="text" name="t_id" id="t_id">
+                            <input type="text" name="message" id="message">
+                            <button type="send" class="btn btn-primary">Send</button>
+                        </form>
+
                     </div>
                 </div>
             </div>
