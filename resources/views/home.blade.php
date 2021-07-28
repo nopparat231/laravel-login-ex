@@ -18,7 +18,7 @@
                         <h1>Add Line For Notify</h1>
                         <img src="https://qr-official.line.me/sid/L/573pogdt.png" >
 
-                        <form action="hooks" method="post">
+                        <form action="{{ route('line.hooks') }}" method="post">
                             <input type="text" name="t_id" id="t_id">
                             <input type="text" name="message" id="message">
                             <button type="send" class="btn btn-primary">Send</button>
