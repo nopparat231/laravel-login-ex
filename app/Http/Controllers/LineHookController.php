@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use LINE\LINEBot;
 use LINE\LINEBot\HTTPClient\CurlHTTPClient;
 use Modules\Line\Constant\LineHookHttpResponse;
@@ -17,33 +18,23 @@ class LineHookController extends Controller
 
     public function hooks(Request $request)
     {
- 
-            $httpClient = new CurlHTTPClient(env('LINE_CHANNEL_ACCESS_TOKEN'));
-            $bot = new LINEBot($httpClient, [
-                'channelSecret' => env('LINE_CHANNEL_SECRET')
-            ]);
-    
-            $signature = $request->header(LINEBot\Constant\HTTPHeader::LINE_SIGNATURE);
-            if(!$signature) {
-                return $this->http403(LineHookHttpResponse::SIGNATURE_INVALID);
-            }
-    
-            try {
-                $bot->parseEventRequest($request->getContent(), $signature);
-            } catch (LINEBot\Exception\InvalidSignatureException $exception) {
-                return $this->http403(LineHookHttpResponse::SIGNATURE_INVALID);
-            } catch (LINEBot\Exception\InvalidEventRequestException $exception) {
-                return $this->http403(LineHookHttpResponse::EVENTS_INVALID);
-            }
-    
-            $events = $request->events;
-            foreach ($events as $event) {
-               logger(json_encode($event));
-            }
-            return $this->http200('anchor');
-       
+
+        $httpClient = new CurlHTTPClient(env('LINE_CHANNEL_ACCESS_TOKEN'));
+        $bot = new LINEBot($httpClient, [
+            'channelSecret' => env('LINE_CHANNEL_SECRET')
+        ]);
+
+        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('hello');
+        $response = $bot->replyMessage(Auth::user()->provider_id, $textMessageBuilder);
+        if ($response->isSucceeded()) {
+            echo 'Succeeded!';
+            return;
+        }
+
+        // Failed
+        echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
     }
-    
+
     public function index()
     {
         //
