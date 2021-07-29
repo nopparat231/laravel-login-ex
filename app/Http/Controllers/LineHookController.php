@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use LINE\LINEBot;
+use LINE\LINEBot\HTTPClient\CurlHTTPClient;
+use Modules\Line\Constant\LineHookHttpResponse;
 
 class LineHookController extends Controller
 {
@@ -14,9 +17,31 @@ class LineHookController extends Controller
 
     public function hooks(Request $request)
     {
-        $params = $request->all();
-        logger(json_encode($params, JSON_UNESCAPED_UNICODE));
-        return response('hello word',200);
+ 
+            $httpClient = new CurlHTTPClient(env('LINE_CHANNEL_ACCESS_TOKEN'));
+            $bot = new LINEBot($httpClient, [
+                'channelSecret' => env('LINE_CHANNEL_SECRET')
+            ]);
+    
+            $signature = $request->header(LINEBot\Constant\HTTPHeader::LINE_SIGNATURE);
+            if(!$signature) {
+                return $this->http403(LineHookHttpResponse::SIGNATURE_INVALID);
+            }
+    
+            try {
+                $bot->parseEventRequest($request->getContent(), $signature);
+            } catch (LINEBot\Exception\InvalidSignatureException $exception) {
+                return $this->http403(LineHookHttpResponse::SIGNATURE_INVALID);
+            } catch (LINEBot\Exception\InvalidEventRequestException $exception) {
+                return $this->http403(LineHookHttpResponse::EVENTS_INVALID);
+            }
+    
+            $events = $request->events;
+            foreach ($events as $event) {
+               logger(json_encode($event));
+            }
+            return $this->http200('anchor');
+       
     }
     
     public function index()
