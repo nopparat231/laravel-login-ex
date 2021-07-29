@@ -38,4 +38,4 @@ Route::get('login/github/callback', [App\Http\Controllers\Auth\LoginController::
 Route::get('login/line', [App\Http\Controllers\Auth\LoginController::class, 'redirectToLine'])->name('login.line');
 Route::get('login/line/callback', [App\Http\Controllers\Auth\LoginController::class, 'handleLineCallback']);
 
-Route::post('hooks', [LineHookController::class, 'hooks'])->name('line.hooks');
+Route::get('hooks', [LineHookController::class, 'hooks'])->name('line.hooks');
