@@ -24,7 +24,7 @@ class LineHookController extends Controller
             'channelSecret' => env('LINE_CHANNEL_SECRET')
         ]);
 
-        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('hello');
+        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($request->input('message'));
         $response = $bot->replyMessage(Auth::user()->provider_id, $textMessageBuilder);
         if ($response->isSucceeded()) {
             echo 'Succeeded!';
