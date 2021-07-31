@@ -18,8 +18,8 @@ class LineHookController extends Controller
 
     public function hooks(Request $request)
     {
-        $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(env('LINE_CHANNEL_ACCESS_TOKEN'));
-$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => env('LINE_CHANNEL_SECRET')]);
+        $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(env('LINE_BOT_CHANNEL_ACCESS_TOKEN'));
+$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => env('LINE_BOT_CHANNEL_SECRET')]);
 
 
         $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($request->input('message'));
