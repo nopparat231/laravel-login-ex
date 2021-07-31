@@ -18,9 +18,24 @@ class LineHookController extends Controller
 
     public function hooks(Request $request)
     {
-        $params = $request->all();
-        logger(json_encode($params, JSON_UNESCAPED_UNICODE));
-        return response('hello world', 200);
+        $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(env('LINE_CHANNEL_ACCESS_TOKEN'));
+$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => env('LINE_CHANNEL_SECRET')]);
+
+
+        $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder('hello');
+        $response = $bot->pushMessage(Auth::user()->provider_id, $textMessageBuilder);
+        if ($response->isSucceeded()) {
+            echo 'Succeeded!';
+            return;
+        }
+
+        // Failed
+        echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
+
+
+        // $params = $request->all();
+        // logger(json_encode($params, JSON_UNESCAPED_UNICODE));
+        // return response('hello world', 200);
     }
 
     public function index()
