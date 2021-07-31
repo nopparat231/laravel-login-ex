@@ -19,6 +19,7 @@
                         <img src="https://qr-official.line.me/sid/L/573pogdt.png" >
 
                         <form action="\hooks" method="post">
+                            @csrf
                             {{-- <input type="text" name="t_id" id="t_id"> --}}
                             <input type="text" name="message" id="message">
                             <button type="send" class="btn btn-primary">Send</button>
