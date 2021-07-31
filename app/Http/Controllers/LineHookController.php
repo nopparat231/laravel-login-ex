@@ -19,11 +19,11 @@ class LineHookController extends Controller
     public function hooks(Request $request)
     {
         $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(env('LINE_BOT_CHANNEL_ACCESS_TOKEN'));
-$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => env('LINE_BOT_CHANNEL_SECRET')]);
+        $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => env('LINE_BOT_CHANNEL_SECRET')]);
 
 
         $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($request->input('message'));
-        $response = $bot->pushMessage($request->input('provider_id'), $textMessageBuilder);
+        $response = $bot->pushMessage(Auth::user()->provider_id, $textMessageBuilder);
         if ($response->isSucceeded()) {
             echo 'Succeeded!';
             return;
